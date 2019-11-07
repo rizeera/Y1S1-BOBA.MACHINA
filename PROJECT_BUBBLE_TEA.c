@@ -149,7 +149,7 @@ FLAVOUR_SCAN:
 
     input_temp = atoi(input) + (tempS - 5);
 
-    if ((input_temp >= 0 && input_temp <= 4) || input[0] == 'q')
+    if ((input_temp >= 0 && input_temp <= 3) || input[0] == 'q')
     {
         if (input[0] == 'q' && input[1] == '\0')
         {
@@ -197,7 +197,7 @@ TOPPING_SCAN:
 
     input_temp = atoi(input) + (tempS - 5);
 
-    if ((input_temp >= 0 && input_temp <= 4) || input[0] == 'q')
+    if ((input_temp >= 0 && input_temp <= 3) || input[0] == 'q')
     {
         if (input[0] == 'q' && input[1] == '\0')
         {
@@ -227,15 +227,14 @@ TOPPING_SCAN:
 
             input_temp = atoi(input) + (tempS - 5);
 
-            if ((input_temp >= 0 && input_temp <= 4) || input[0] == 'q')
+            if ((input_temp >= 0 && input_temp <= 3) || input[0] == 'q')
             {
                 if (input[0] == 'q' && input[1] == '\0')
                 {
                     return 0;
                 }
-                //USE 'NEW_INTEGER' to position in the FLAVOR_PRICE_ARRAY;
-                //ADD PRICE IN THE  "TOTAL_PRICE";
-                //ASSIGN NEW_INTEGER to SELECTION_ARRAY
+                TOTAL_price += 
+                
             }
             else
 
