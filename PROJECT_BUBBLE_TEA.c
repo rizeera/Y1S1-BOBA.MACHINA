@@ -6,6 +6,7 @@ char input[10];
 int input_temp;
 int tempS;
 
+    
 /*
     //  INPUT / OUTPUT //
     char input[1] ;
@@ -22,7 +23,7 @@ int tempS;
     MONEY ARRAY 
     int MONEY_value[5] = { 100,50,20,10,5 };
     int MONEY_machine[5] = { 0,0,0,0,0 };
-    int MONEY_inse  rt[5];
+    int MONEY_insert[5];
     int MONEY_changes[5];
     
     MONEY 
@@ -42,34 +43,65 @@ int main()
 {
     /* MAIN MENU */
 
+    printf("         _________________________________  \n") ;
+    printf("---------|Welcome to Bubble Tea Cafe : -)|-------- \n") ;
+    printf("---------|_______________________________|-------- \n") ;
+    printf("  ....                                            \n") ;
+    printf("  |  |                                    (o)(o) \n") ;
+    printf(":------:                                 /     \\ \n") ;
+    printf("|======|                                /       | \n") ;
+    printf("|      |                               /   \\  * | \n") ;
+    printf("|--Bo--|                 ________     /    /\\__/ \n") ;
+    printf("|--Ba--|                /        \\   /    / \n") ;
+    printf("|      |       / \\     /  ____    \\_/    / \n") ;
+    printf("|o8oo8o|      // \\ \\  /  /    \\         / \n") ;
+    printf("|88o88o|      V   \\ \\/  /      \\       / \n") ;
+    printf("'------'           \\___/        \\_____/ \n") ;
+    printf("-------------------------------------------------- \n") ;
+    printf("\n") ;
+    printf("Menu                                 M      L        \n") ;
+    printf("\n") ;
+    printf("0:Black tea                          30     40     \n") ;
+    printf("1:Green tea                          30     40     \n") ;
+    printf("2:Thai tea                           30     40     \n") ;
+    printf("3:Passion fruit green tea            45     55     \n") ;
+    printf("4:Taro smoothie tea                  40     50     \n") ;
+    printf("5:Peach tea                          35     45     \n") ; 
+    printf("\n") ;
+    printf("Flavors \n") ;
+    printf("\n") ;
+    printf("0:Black tea                          +0 \n") ;
+    printf("1:Green tea                          +5 \n") ;
+    printf("2:Thai tea                           +5 \n") ;
+    printf("3:Passion fruit green tea            +10 \n") ; 
+    printf("\n") ;
+    printf("Toppings \n") ;
+    printf("\n") ;
+    // printf("0:Black tea                          +5  (%d units left)  \n",top_unit[0] /*Put unit here naja*/) ;
+    // printf("1:Green tea                          +15 (%d units left)  \n",top_unit[1] /*Put unit here naja*/) ;
+    // printf("2:Thai tea                           +10 (%d units left)  \n",top_unit[2] /*Put unit here naja*/) ;
+    // printf("3:Passion fruit green tea            +10 (%d units left)  \n",top_unit[3] /*Put unit here naja*/) ;
+
+
     /* ASK FOR BASSE TEA */
 
     printf("Please select your base tea (enter 'q' to exit program): ");
     scanf("%s", input);
 TEA_SCAN:
-    if (input[1] != '\0')
-    {
-        input[0] = '\0';
-        goto RE_SCAN_TEA;
-    }
+    if (input[1] != '\0') { input[0] = '\0'; goto RE_SCAN_TEA;  }
     else
     {
         if (input[0] >= '0' && input[0] <= '9' || input[0] == 'q')
         {
             tempS = 5;
-        }
-        else
-            tempS = 0;
+        } else tempS = 0;
     }
 
     input_temp = atoi(input) + (tempS - 5);
 
     if ((input_temp >= 0 && input_temp <= 5) || input[0] == 'q')
     {
-        if (input[0] == 'q' && input[1] == '\0')
-        {
-            return 0;
-        }
+        if (input[0] == 'q' && input[1] == '\0') { return 0; }
         //USE 'NEW_INTEGER' to position in the FLAVOR_PRICE_ARRAY;
         //ADD PRICE IN THE  "TOTAL_PRICE";
         //ASSIGN NEW_INTEGER to SELECTION_ARRAY
@@ -81,10 +113,7 @@ TEA_SCAN:
         {
             printf("Sorry, input again. : ");
             scanf("%s", input);
-            if (input[0] == 'q' && input[1] == '\0')
-            {
-                return 0;
-            }
+            if (input[0] == 'q' && input[1] == '\0') { return 0; }
             goto TEA_SCAN;
         }
     /* ////////////////////////////////////////////////////////////////// */
@@ -94,18 +123,11 @@ TEA_SCAN:
     printf("Please select the size of your cup (enter 'q' to exit program): ");
     scanf("%s", input);
 CUP_SCAN:
-    if (input[1] != '\0')
-    {
-        input[0] = '\0';
-        goto RE_SCAN_CUP;
-    }
+    if (input[1] != '\0') { input[0] = '\0'; goto RE_SCAN_CUP; }
 
     if (input[0] == 'm' || input[0] == 'l' || input[0] == 'q')
     {
-        if (input[0] == 'q' && input[1] == '\0')
-        {
-            return 0;
-        }
+        if (input[0] == 'q' && input[1] == '\0') { return 0; }
         if (input[0] == 'l')
         {
             TOTAL_price += 10;
@@ -118,10 +140,7 @@ CUP_SCAN:
         {
             printf("Sorry, input again. : ");
             scanf("%s", input);
-            if (input[0] == 'q' && input[1] == '\0')
-            {
-                return 0;
-            }
+            if (input[0] == 'q' && input[1] == '\0') { return 0; }
             goto CUP_SCAN;
         }
 
@@ -132,29 +151,19 @@ CUP_SCAN:
     printf("Please select your flavour (enter 'q' to exit program): ");
     scanf("%s", input);
 FLAVOUR_SCAN:
-    if (input[1] != '\0')
-    {
-        input[0] = '\0';
-        goto RE_SCAN_FLAVOUR;
-    }
+    if (input[1] != '\0') { input[0] = '\0'; goto RE_SCAN_FLAVOUR; }
     else
     {
         if (input[0] >= '0' && input[0] <= '9' || input[0] == 'q')
-        {
-            tempS = 5;
-        }
-        else
-            tempS = 0;
+        { tempS = 5; } 
+        else tempS = 0;
     }
 
     input_temp = atoi(input) + (tempS - 5);
 
     if ((input_temp >= 0 && input_temp <= 3) || input[0] == 'q')
     {
-        if (input[0] == 'q' && input[1] == '\0')
-        {
-            return 0;
-        }
+        if (input[0] == 'q' && input[1] == '\0') { return 0; }
         //USE 'NEW_INTEGER' to position in the FLAVOR_PRICE_ARRAY;
         //ADD PRICE IN THE  "TOTAL_PRICE";
         //ASSIGN NEW_INTEGER to SELECTION_ARRAY
@@ -166,10 +175,7 @@ FLAVOUR_SCAN:
         {
             printf("Sorry, input again. : ");
             scanf("%s", input);
-            if (input[0] == 'q' && input[1] == '\0')
-            {
-                return 0;
-            }
+            if (input[0] == 'q' && input[1] == '\0') { return 0; }
             goto FLAVOUR_SCAN;
         }
 
@@ -188,21 +194,15 @@ TOPPING_SCAN:
     else
     {
         if (input[0] >= '0' && input[0] <= '9' || input[0] == 'q')
-        {
-            tempS = 5;
-        }
-        else
-            tempS = 0;
+        { tempS = 5; }
+        else tempS = 0;
     }
 
     input_temp = atoi(input) + (tempS - 5);
 
     if ((input_temp >= 0 && input_temp <= 2) || input[0] == 'q')
     {
-        if (input[0] == 'q' && input[1] == '\0')
-        {
-            return 0;
-        }
+        if (input[0] == 'q' && input[1] == '\0') { return 0; }
         TOPPING_amount = input_temp;
 
         for (int i = 0; i < TOPPING_amount; i++)
@@ -211,44 +211,30 @@ TOPPING_SCAN:
             printf("Select your %d topping : ", i + 1);
             scanf("%s", input);
         TOPPINGsel_SCAN:
-            if (input[1] != '\0')
-            {
-                input[0] = '\0';
-                goto RE_SCAN_TOPPINGsel;
-            }
+            if (input[1] != '\0') { input[0] = '\0'; goto RE_SCAN_TOPPINGsel; }
             else
             {
                 if (input[0] >= '0' && input[0] <= '9' || input[0] == 'q')
-                {
-                    tempS = 5;
-                }
-                else
-                    tempS = 0;
+                { tempS = 5; }
+                else tempS = 0;
             }
 
             input_temp = atoi(input) + (tempS - 5);
 
             if ((input_temp >= 0 && input_temp <= 3) || input[0] == 'q')
             {
-                if (input[0] == 'q' && input[1] == '\0')
-                {
-                    return 0;
-                }
+                if (input[0] == 'q' && input[1] == '\0') { return 0; }
                 if (TOPPING_unit[input_temp] > 0)
                 {
                     //ADD TOPPING;
                     TOTAL_price += TOPPING_price[input_temp];
                     TOPPING_unit[input_temp]--;
-                    //TOTAL_price += 4;
                 }
                 else
                 {
                     printf("Topping is out of stock, enter again :");
                     scanf("%s", input);
-                    if (input[0] == 'q' && input[1] == '\0')
-                    {
-                        return 0;
-                    }
+                    if (input[0] == 'q' && input[1] == '\0') { return 0; }
                     goto TOPPINGsel_SCAN;
                 }
             }
@@ -259,10 +245,7 @@ TOPPING_SCAN:
                 {
                     printf("Sorry, input again. : ");
                     scanf("%s", input);
-                    if (input[0] == 'q' && input[1] == '\0')
-                    {
-                        return 0;
-                    }
+                    if (input[0] == 'q' && input[1] == '\0') { return 0; }
                     goto TOPPINGsel_SCAN;
                 }
 
@@ -276,10 +259,7 @@ TOPPING_SCAN:
         {
             printf("Sorry, input again. : ");
             scanf("%s", input);
-            if (input[0] == 'q' && input[1] == '\0')
-            {
-                return 0;
-            }
+            if (input[0] == 'q' && input[1] == '\0') { return 0; }
             goto TOPPING_SCAN;
         }
 
