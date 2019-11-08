@@ -10,15 +10,15 @@ int tempS;
     //  INPUT / OUTPUT //
     char input[1] ;
     int input_temp;
-    int TOPPING_amount;
+    */ int TOPPING_amount; /*
     
 
     REFILLING THE MACHINE
     int TEA_price[6] = { 30,30,30,45,40,35 }; //base on Medium cup size's price
-    int FLAVOR_price[4] = { 0,5,5,10 };
-    int TOPPING_price[4] = { 5,15,10,10 };
-    int TOPPING_unit[4] = { 0,0,0,0 }; //OR JUST FILL THE VALUE LATER;
-
+    int FLAVOR_price[4] = { 0,5,5,10 }; */
+    int TOPPING_price[4] = { 5,15,10,10 }; 
+    int TOPPING_unit[4] = { 2,0,0,0 };  //OR JUST FILL THE VALUE LATER;
+/*
     MONEY ARRAY 
     int MONEY_value[5] = { 100,50,20,10,5 };
     int MONEY_machine[5] = { 0,0,0,0,0 };
@@ -177,7 +177,7 @@ FLAVOUR_SCAN:
 
     /* SELECT TOPPING */
 
-    printf("Please select your flavour (enter 'q' to exit program): ");
+    printf("Please select your topping (maximum of 2) (enter 'q' to exit program): ");
     scanf("%s", input);
 TOPPING_SCAN:
     if (input[1] != '\0')
@@ -197,13 +197,14 @@ TOPPING_SCAN:
 
     input_temp = atoi(input) + (tempS - 5);
 
-    if ((input_temp >= 0 && input_temp <= 3) || input[0] == 'q')
+    if ((input_temp >= 0 && input_temp <= 2) || input[0] == 'q')
     {
         if (input[0] == 'q' && input[1] == '\0')
         {
             return 0;
         }
         TOPPING_amount = input_temp;
+
         for (int i = 0; i < TOPPING_amount; i++)
         {
             /* CHOOSE TOPPING */
@@ -233,8 +234,23 @@ TOPPING_SCAN:
                 {
                     return 0;
                 }
-                TOTAL_price += 
-                
+                if (TOPPING_unit[input_temp] > 0)
+                {
+                    //ADD TOPPING;
+                    TOTAL_price += TOPPING_price[input_temp];
+                    TOPPING_unit[input_temp]--;
+                    //TOTAL_price += 4;
+                }
+                else
+                {
+                    printf("Topping is out of stock, enter again :");
+                    scanf("%s", input);
+                    if (input[0] == 'q' && input[1] == '\0')
+                    {
+                        return 0;
+                    }
+                    goto TOPPINGsel_SCAN;
+                }
             }
             else
 
@@ -250,7 +266,7 @@ TOPPING_SCAN:
                     goto TOPPINGsel_SCAN;
                 }
 
-        /* ///////////////////////////////////////////////////////////////////// */
+            /* ///////////////////////////////////////////////////////////////////// */
         }
     }
     else
