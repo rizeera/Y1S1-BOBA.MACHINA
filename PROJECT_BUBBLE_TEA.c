@@ -82,8 +82,9 @@ int main()
     // printf("2:Thai tea                           +10 (%d units left)  \n",top_unit[2] /*Put unit here naja*/) ;
     // printf("3:Passion fruit green tea            +10 (%d units left)  \n",top_unit[3] /*Put unit here naja*/) ;
 
-
-    /* ASK FOR BASSE TEA */
+    ////////////////////////////////////
+    ////////* ASK FOR BASSE TEA *///////
+    ////////////////////////////////////
 
     printf("Please select your base tea (enter 'q' to exit program): ");
     scanf("%s", input);
@@ -118,7 +119,9 @@ TEA_SCAN:
         }
     /* ////////////////////////////////////////////////////////////////// */
 
-    /*  SELECT THE SIZE OF CUP;    */
+    /////////////////////////////////////////////
+    ///////*  SELECT THE SIZE OF CUP;    *///////
+    /////////////////////////////////////////////
 
     printf("Please select the size of your cup (enter 'q' to exit program): ");
     scanf("%s", input);
@@ -146,7 +149,9 @@ CUP_SCAN:
 
     /* ///////////////////////////////////////////////////////////////// */
 
-    /* SELECT THE FLAVOuR */
+    //////////////////////////////////////
+    ////////* SELECT THE FLAVOuR *////////
+    //////////////////////////////////////
 
     printf("Please select your flavour (enter 'q' to exit program): ");
     scanf("%s", input);
@@ -181,16 +186,14 @@ FLAVOUR_SCAN:
 
     /* ///////////////////////////////////////////////////////////////// */
 
-    /* SELECT TOPPING */
+    //////////////////////////////////////
+    /////////* SELECT TOPPING *///////////
+    //////////////////////////////////////
 
     printf("Please select your topping (maximum of 2) (enter 'q' to exit program): ");
     scanf("%s", input);
 TOPPING_SCAN:
-    if (input[1] != '\0')
-    {
-        input[0] = '\0';
-        goto RE_SCAN_TOPPING;
-    }
+    if (input[1] != '\0'){ input[0] = '\0'; goto RE_SCAN_TOPPING; }
     else
     {
         if (input[0] >= '0' && input[0] <= '9' || input[0] == 'q')
@@ -207,7 +210,10 @@ TOPPING_SCAN:
 
         for (int i = 0; i < TOPPING_amount; i++)
         {
-            /* CHOOSE TOPPING */
+
+            ///////////////////////////////////////////
+            ////////////* CHOOSE TOPPING */////////////
+            ///////////////////////////////////////////
             printf("Select your %d topping : ", i + 1);
             scanf("%s", input);
         TOPPINGsel_SCAN:
