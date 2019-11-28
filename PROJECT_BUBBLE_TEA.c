@@ -21,7 +21,8 @@ int valid_check;
     int TOPPING_unit[4] = { 2,0,0,0 };  //OR JUST FILL THE VALUE LATER;
 
     /* MONEY ARRAY */
-     int MONEY_value[5] = { 100,50,20,10,5 };
+     int MONEY_value[5]
+     = { 100,50,20,10,5 };
     int MONEY_machine[5] = { 0,4,0,1,2 }; 
     int MONEY_insert[5]; 
     int MONEY_changes[5];
@@ -87,9 +88,11 @@ int main()
     ////////////////////////////////////
 
     printf("Please select your base tea (enter 'q' to exit program): ");
-    scanf("%s", input);
+    //scanf("%s ", input);
+    fgets(input,10,stdin);
+
 TEA_SCAN:
-    if (input[1] != '\0') { input[0] = '\0'; goto RE_SCAN_TEA;  }
+    if (input[1] != '\n') { input[0] = '\0'; goto RE_SCAN_TEA;  }
     else
     {
         if (input[0] >= '0' && input[0] <= '9' || input[0] == 'q')
@@ -102,7 +105,7 @@ TEA_SCAN:
 
     if ((input_temp >= 0 && input_temp <= 5) || input[0] == 'q')
     {
-        if (input[0] == 'q' && input[1] == '\0') { return 0; }
+        if (input[0] == 'q' && input[1] == '\n') { return 0; }
         //USE 'NEW_INTEGER' to position in the FLAVOR_PRICE_ARRAY;
         //ADD PRICE IN THE  "TOTAL_PRICE";
         //ASSIGN NEW_INTEGER to SELECTION_ARRAY
@@ -110,11 +113,11 @@ TEA_SCAN:
     else
 
     RE_SCAN_TEA:
-        while ((input[0] < '0' && input[0] > '1') || input[0] != 'q' || input[1] != '\0')
+        while ((input[0] < '0' && input[0] > '1') || input[0] != 'q' || input[1] != '\n')
         {
             printf("Sorry, input again. : ");
-            scanf("%s", input);
-            if (input[0] == 'q' && input[1] == '\0') { return 0; }
+            fgets(input,10,stdin);
+            if (input[0] == 'q' && input[1] == '\n') { return 0; }
             goto TEA_SCAN;
         }
     /* ////////////////////////////////////////////////////////////////// */
@@ -124,13 +127,13 @@ TEA_SCAN:
     /////////////////////////////////////////////
 
     printf("Please select the size of your cup (enter 'q' to exit program): ");
-    scanf("%s", input);
+    fgets(input,10,stdin);
 CUP_SCAN:
-    if (input[1] != '\0') { input[0] = '\0'; goto RE_SCAN_CUP; }
+    if (input[1] != '\n') { input[0] = '\0'; goto RE_SCAN_CUP; }
 
     if (input[0] == 'm' || input[0] == 'l' || input[0] == 'q')
     {
-        if (input[0] == 'q' && input[1] == '\0') { return 0; }
+        if (input[0] == 'q' && input[1] == '\n') { return 0; }
         if (input[0] == 'l')
         {
             TOTAL_price += 10;
@@ -139,11 +142,11 @@ CUP_SCAN:
     else
     RE_SCAN_CUP:
 
-        while ((input[0] != 'm' && input[0] != 'l' && input[0] != 'q') || input[1] != '\0')
+        while ((input[0] != 'm' && input[0] != 'l' && input[0] != 'q') || input[1] != '\n')
         {
             printf("Sorry, input again. : ");
-            scanf("%s", input);
-            if (input[0] == 'q' && input[1] == '\0') { return 0; }
+            fgets(input,10,stdin);
+            if (input[0] == 'q' && input[1] == '\n') { return 0; }
             goto CUP_SCAN;
         }
 
@@ -154,9 +157,9 @@ CUP_SCAN:
     //////////////////////////////////////
 
     printf("Please select your flavour (enter 'q' to exit program): ");
-    scanf("%s", input);
+    fgets(input,10,stdin);
 FLAVOUR_SCAN:
-    if (input[1] != '\0') { input[0] = '\0'; goto RE_SCAN_FLAVOUR; }
+    if (input[1] != '\n') { input[0] = '\0'; goto RE_SCAN_FLAVOUR; }
     else
     {
         if (input[0] >= '0' && input[0] <= '9' || input[0] == 'q')
@@ -168,7 +171,7 @@ FLAVOUR_SCAN:
 
     if ((input_temp >= 0 && input_temp <= 3) || input[0] == 'q')
     {
-        if (input[0] == 'q' && input[1] == '\0') { return 0; }
+        if (input[0] == 'q' && input[1] == '\n') { return 0; }
         //USE 'NEW_INTEGER' to position in the FLAVOR_PRICE_ARRAY;
         //ADD PRICE IN THE  "TOTAL_PRICE";
         //ASSIGN NEW_INTEGER to SELECTION_ARRAY
@@ -176,11 +179,11 @@ FLAVOUR_SCAN:
     else
 
     RE_SCAN_FLAVOUR:
-        while ((input[0] < '0' && input[0] > '9') || input[0] != 'q' || input[1] != '\0')
+        while ((input[0] < '0' && input[0] > '9') || input[0] != 'q' || input[1] != '\n')
         {
             printf("Sorry, input again. : ");
-            scanf("%s", input);
-            if (input[0] == 'q' && input[1] == '\0') { return 0; }
+            fgets(input,10,stdin);
+            if (input[0] == 'q' && input[1] == '\n') { return 0; }
             goto FLAVOUR_SCAN;
         }
 
@@ -191,9 +194,9 @@ FLAVOUR_SCAN:
     //////////////////////////////////////
 
     printf("Please select your topping (maximum of 2) (enter 'q' to exit program): ");
-    scanf("%s", input);
+    fgets(input,10,stdin);
 TOPPING_SCAN:
-    if (input[1] != '\0'){ input[0] = '\0'; goto RE_SCAN_TOPPING; }
+    if (input[1] != '\n'){ input[0] = '\0'; goto RE_SCAN_TOPPING; }
     else
     {
         if (input[0] >= '0' && input[0] <= '9' || input[0] == 'q')
@@ -205,7 +208,7 @@ TOPPING_SCAN:
 
     if ((input_temp >= 0 && input_temp <= 2) || input[0] == 'q')
     {
-        if (input[0] == 'q' && input[1] == '\0') { return 0; }
+        if (input[0] == 'q' && input[1] == '\n') { return 0; }
         TOPPING_amount = input_temp;
 
         for (int i = 0; i < TOPPING_amount; i++)
@@ -215,9 +218,9 @@ TOPPING_SCAN:
             ////////////* CHOOSE TOPPING */////////////
             ///////////////////////////////////////////
             printf("Select your %d topping : ", i + 1);
-            scanf("%s", input);
+            fgets(input,10,stdin); 
         TOPPINGsel_SCAN:
-            if (input[1] != '\0') { input[0] = '\0'; goto RE_SCAN_TOPPINGsel; }
+            if (input[1] != '\n') { input[0] = '\0'; goto RE_SCAN_TOPPINGsel; }
             else
             {
                 if (input[0] >= '0' && input[0] <= '9' || input[0] == 'q')
@@ -229,7 +232,7 @@ TOPPING_SCAN:
 
             if ((input_temp >= 0 && input_temp <= 3) || input[0] == 'q')
             {
-                if (input[0] == 'q' && input[1] == '\0') { return 0; }
+                if (input[0] == 'q' && input[1] == '\n') { return 0; }
                 if (TOPPING_unit[input_temp] > 0)
                 {
                     //ADD TOPPING;
@@ -239,19 +242,19 @@ TOPPING_SCAN:
                 else
                 {
                     printf("Topping is out of stock, enter again :");
-                    scanf("%s", input);
-                    if (input[0] == 'q' && input[1] == '\0') { return 0; }
+                    fgets(input,10,stdin); 
+                    if (input[0] == 'q' && input[1] == '\n') { return 0; }
                     goto TOPPINGsel_SCAN;
                 }
             }
             else
 
             RE_SCAN_TOPPINGsel:
-                while ((input[0] < '0' && input[0] > '9') || input[0] != 'q' || input[1] != '\0')
+                while ((input[0] < '0' && input[0] > '9') || input[0] != 'q' || input[1] != '\n')
                 {
                     printf("Sorry, input again. : ");
-                    scanf("%s", input);
-                    if (input[0] == 'q' && input[1] == '\0') { return 0; }
+                    fgets(input,10,stdin);  
+                    if (input[0] == 'q' && input[1] == '\n') { return 0; }
                     goto TOPPINGsel_SCAN;
                 }
 
@@ -261,11 +264,11 @@ TOPPING_SCAN:
     else
 
     RE_SCAN_TOPPING:
-        while ((input[0] < '0' && input[0] > '9') || input[0] != 'q' || input[1] != '\0')
+        while ((input[0] < '0' && input[0] > '9') || input[0] != 'q' || input[1] != '\n')
         {
             printf("Sorry, input again. : ");
-            scanf("%s", input);
-            if (input[0] == 'q' && input[1] == '\0') { return 0; }
+            fgets(input,10,stdin); 
+            if (input[0] == 'q' && input[1] == '\n') { return 0; }
             goto TOPPING_SCAN;
         }
 
@@ -276,9 +279,9 @@ TOPPING_SCAN:
     ////////////////////////////////////////////////
     printf("Total price is %d", TOTAL_price);
     printf("Are YOu ReaDY TO PaY nOw ? (y/n):");
-    scanf("%s", input);
+    fgets(input,10,stdin); 
 MONEY_SCAN:
-    if (input[1] != '\0') { input[0] = '\0'; goto RE_SCAN_MONEY; }
+    if (input[1] != '\n') { input[0] = '\0'; goto RE_SCAN_MONEY; }
     else
     {
         if (input[0] == 'n') { return 0; }
@@ -288,10 +291,10 @@ MONEY_SCAN:
         }
     }
     RE_SCAN_MONEY:
-    while (input[0]!='n' && input[0]!='y' && input[1]!='\n')
+    while ((input[0]!='n' && input[0]!='y') || input[1]!='\n')
     {
         printf("sorry, input again");
-        scanf("%s", input);
+        fgets(input,10,stdin); 
         goto MONEY_SCAN;
     }
 
@@ -302,6 +305,7 @@ MONEY_SCAN:
     ////// /* INSERT AMOUNT OF MONEY *////////
     //////////////////////////////////////////
     printf("Machine cash: ( ");
+    
     for (int i = 0; i < 5; i++)
     {
         if (i==4)   
@@ -314,13 +318,15 @@ MONEY_SCAN:
     for (int i = 0; i < 5; i++)
     {
         printf("%d=:" ,MONEY_value[i]);
-        scanf("%s" ,input);
+        fgets(input,10,stdin); 
+        char *pos;    if ((pos=strchr(input, '\n')) != NULL)        *pos = '\0';
 
 CHECK_VALID:
         STRlength = strlen(input);
+        if (input[0] == 'q') { return 0; }
         for (int i = 0; i < STRlength; i++)
         {
-            if (input[i] < '0' || input[i] > '9') { valid_check = 0; break;}
+            if (input[i] < 48 || input[i] > 57) { valid_check = 0; break;}
             else { valid_check = 1; }
         }
 
@@ -328,7 +334,9 @@ CHECK_VALID:
         if (valid_check==0)
         {
             printf("invalid, input again:");
-            scanf("%s" ,input);
+            fgets(input,10,stdin); 
+            char *pos;    if ((pos=strchr(input, '\n')) != NULL)        *pos = '\0';
+            if (input[0] == 'q') { return 0; }
             goto CHECK_VALID;
         }
 
