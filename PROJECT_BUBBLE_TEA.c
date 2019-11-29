@@ -135,7 +135,7 @@ TEA_SCAN:
     ///////*  SELECT THE SIZE OF CUP;    *///////
     /////////////////////////////////////////////
 
-    printf("Please select the size of your cup (enter 'q' to exit program): ");
+    printf("Please select the size of your cup m (medium) or l (large) (enter 'q' to exit program): ");
     fgets(input,10,stdin);
 CUP_SCAN:
     if (input[1] != '\n') { input[0] = '\0'; goto RE_SCAN_CUP; }
