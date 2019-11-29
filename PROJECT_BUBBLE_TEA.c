@@ -12,18 +12,26 @@ int valid_check;
 
     /* INPUT / OUTPUT */ 
     int TOPPING_amount; 
+    char OUT_tea[50];
+    char OUT_flavor[15];
+    char OUT_Topping[2][15];
     
+    /* MENU */
+    char MENU_tea[6][50] = { "Black tea", "Green tea", "Thai tea", "Passion fruit green tea", "Taro Smoothie tea", "Peach tea" };
+    char MENU_flavor[4][15] = { "Normal", "Milk", "Honey", "Brown Sugar" };
+    char MENU_Topping[4][15] = { "Boba", "Popping Boba", "Jelly", "Pudding"};
 
     /* REFILLING THE MACHINE */
     int TEA_price[6] = { 30,30,30,45,40,35 }; //base on Medium cup size's price
     int FLAVOR_price[4] = { 0,5,5,10 }; 
     int TOPPING_price[4] = { 5,15,10,10 }; 
-    int TOPPING_unit[4] = { 2,0,0,0 };  //OR JUST FILL THE VALUE LATER;
+    int TOPPING_unit[4] = { 2,2,2,2 };  //OR JUST FILL THE VALUE LATER;
+    int TOPPING_select[2];
 
     /* MONEY ARRAY */
      int MONEY_value[5]
      = { 100,50,20,10,5 };
-    int MONEY_machine[5] = { 0,0,0,0,0 }; 
+    int MONEY_machine[5] = { 99,99,99,99,99 }; 
     int MONEY_insert[5]; 
     int MONEY_changes[5];
     
@@ -105,8 +113,9 @@ TEA_SCAN:
     input_temp = atoi(input) + (tempS - 5);
     if ((input_temp >= 0 && input_temp <= 5) || input[0] == 'q')
     {
-        if (input[0] == 'q' && input[1] == '\n') { goto MENU; }
-        //USE 'NEW_INTEGER' to position in the FLAVOR_PRICE_ARRAY;
+        if (input[0] == 'q' && input[1] == '\n') { TOTAL_price = 0; goto MENU; }
+        TOTAL_price += TEA_price[input_temp];
+        strcpy(OUT_tea, MENU_tea[input_temp]);
         //ADD PRICE IN THE  "TOTAL_PRICE";
         //ASSIGN NEW_INTEGER to SELECTION_ARRAY
     }
@@ -117,7 +126,7 @@ TEA_SCAN:
         {
             printf("Sorry, input again. : ");
             fgets(input,10,stdin);
-            if (input[0] == 'q' && input[1] == '\n') { goto MENU; }
+            if (input[0] == 'q' && input[1] == '\n') { TOTAL_price = 0; goto MENU; }
             goto TEA_SCAN;
         }
     /* ////////////////////////////////////////////////////////////////// */
@@ -133,7 +142,7 @@ CUP_SCAN:
 
     if (input[0] == 'm' || input[0] == 'l' || input[0] == 'q')
     {
-        if (input[0] == 'q' && input[1] == '\n') { goto MENU; }
+        if (input[0] == 'q' && input[1] == '\n') { TOTAL_price = 0; goto MENU; }
         if (input[0] == 'l')
         {
             TOTAL_price += 10;
@@ -146,7 +155,7 @@ CUP_SCAN:
         {
             printf("Sorry, input again. : ");
             fgets(input,10,stdin);
-            if (input[0] == 'q' && input[1] == '\n') { goto MENU; }
+            if (input[0] == 'q' && input[1] == '\n') { TOTAL_price = 0; goto MENU; }
             goto CUP_SCAN;
         }
 
@@ -171,7 +180,9 @@ FLAVOUR_SCAN:
 
     if ((input_temp >= 0 && input_temp <= 3) || input[0] == 'q')
     {
-        if (input[0] == 'q' && input[1] == '\n') { goto MENU; }
+        if (input[0] == 'q' && input[1] == '\n') { TOTAL_price = 0; goto MENU; }
+        TOTAL_price += FLAVOR_price[input_temp];
+        strcpy(OUT_flavor, MENU_flavor[input_temp]);
         //USE 'NEW_INTEGER' to position in the FLAVOR_PRICE_ARRAY;
         //ADD PRICE IN THE  "TOTAL_PRICE";
         //ASSIGN NEW_INTEGER to SELECTION_ARRAY
@@ -183,7 +194,7 @@ FLAVOUR_SCAN:
         {
             printf("Sorry, input again. : ");
             fgets(input,10,stdin);
-            if (input[0] == 'q' && input[1] == '\n') { goto MENU; }
+            if (input[0] == 'q' && input[1] == '\n') { TOTAL_price = 0; goto MENU; }
             goto FLAVOUR_SCAN;
         }
 
@@ -208,7 +219,7 @@ TOPPING_SCAN:
 
     if ((input_temp >= 0 && input_temp <= 2) || input[0] == 'q')
     {
-        if (input[0] == 'q' && input[1] == '\n') { goto MENU; }
+        if (input[0] == 'q' && input[1] == '\n') { TOTAL_price = 0; goto MENU; }
         TOPPING_amount = input_temp;
 
         for (int i = 0; i < TOPPING_amount; i++)
@@ -232,18 +243,38 @@ TOPPING_SCAN:
 
             if ((input_temp >= 0 && input_temp <= 3) || input[0] == 'q')
             {
-                if (input[0] == 'q' && input[1] == '\n') { goto MENU; }
+                if (input[0] == 'q' && input[1] == '\n') 
+                {
+                    for (int j = 0; j < TOPPING_amount-1; j++)
+                    {
+                        TOPPING_unit[TOPPING_select[j]]++;
+                    }
+                    TOTAL_price = 0;
+                    goto MENU; 
+                }
+
                 if (TOPPING_unit[input_temp] > 0)
                 {
                     //ADD TOPPING;
                     TOTAL_price += TOPPING_price[input_temp];
                     TOPPING_unit[input_temp]--;
+                    TOPPING_select[i] = input_temp;
+                    strcpy(OUT_Topping[i], MENU_Topping[input_temp]);
                 }
                 else
                 {
                     printf("Topping is out of stock, enter again :");
                     fgets(input,10,stdin); 
-                    if (input[0] == 'q' && input[1] == '\n') { goto MENU; }
+                    if (input[0] == 'q' && input[1] == '\n') 
+                    {
+                        for (int j = 0; j < TOPPING_amount-1; j++)
+                        {
+                            TOPPING_unit[TOPPING_select[j]]++;
+                        }
+                        TOTAL_price = 0;
+                        goto MENU;
+                        
+                    }
                     goto TOPPINGsel_SCAN;
                 }
             }
@@ -254,7 +285,16 @@ TOPPING_SCAN:
                 {
                     printf("Sorry, input again. : ");
                     fgets(input,10,stdin);  
-                    if (input[0] == 'q' && input[1] == '\n') { goto MENU; }
+                    if (input[0] == 'q' && input[1] == '\n') 
+                    {
+                        for (int j = 0; j < TOPPING_amount-1; j++)
+                        {
+                            TOPPING_unit[TOPPING_select[j]]++;
+                        }
+                        TOTAL_price = 0;
+                        goto MENU;
+                        
+                    }                    
                     goto TOPPINGsel_SCAN;
                 }
 
@@ -268,7 +308,7 @@ TOPPING_SCAN:
         {
             printf("Sorry, input again. : ");
             fgets(input,10,stdin); 
-            if (input[0] == 'q' && input[1] == '\n') { goto MENU; }
+            if (input[0] == 'q' && input[1] == '\n') { TOTAL_price = 0; goto MENU; }
             goto TOPPING_SCAN;
         }
 
@@ -277,7 +317,7 @@ TOPPING_SCAN:
     ////////////////////////////////////////////////
     ///////// /* ARE YOU READY TO PAY ? */ /////////
     ////////////////////////////////////////////////
-    printf("Total price is %d", TOTAL_price);
+    printf("Total price is %d\n", TOTAL_price);
     printf("Are YOu ReaDY TO PaY nOw ? (y/n):");
     fgets(input,10,stdin); 
 MONEY_SCAN:
@@ -286,7 +326,14 @@ MONEY_SCAN:
     {
         if (input[0] == 'n') 
         {
-            /* RESET  */ 
+            
+            for (int i = 0; i < TOPPING_amount-1; i++)
+            {
+                TOPPING_unit[TOPPING_select[i]]++;
+            }
+            TOTAL_price = 0;
+            goto MENU;
+                
         }
         else if (input[0] != 'y')
         {
@@ -328,7 +375,26 @@ INSERT_MONEY:
 
 CHECK_VALID:
         STRlength = strlen(input);
-        if (input[0] == 'q') { goto MENU; }
+        if (input[0] == 'q') 
+        { 
+            for (int i = 0; i < TOPPING_amount; i++)
+            {
+                TOPPING_unit[TOPPING_select[i]]++;
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                MONEY_changes[i] = MONEY_insert[i];
+                MONEY_machine[i] -= MONEY_insert[i];
+            }
+            TOTAL_price = 0; 
+            printf("\n");
+            for (int i = 0; i < 5; i++)
+            {
+                printf("%d " ,MONEY_changes[i]);
+            }
+            goto MENU;
+        }
+
         for (int i = 0; i < STRlength; i++)
         {
             if (input[i] < 48 || input[i] > 57) { valid_check = 0; break;}
@@ -341,7 +407,25 @@ CHECK_VALID:
             printf("invalid, input again:");
             fgets(input,10,stdin); 
             char *pos;    if ((pos=strchr(input, '\n')) != NULL)        *pos = '\0';
-            if (input[0] == 'q') { goto MENU; }
+            if (input[0] == 'q') 
+            { 
+                for (int i = 0; i < TOPPING_amount-1; i++)
+                {
+                    TOPPING_unit[TOPPING_select[i]]++;
+                }
+                for (int i = 0; i < 5; i++)
+                {
+                    MONEY_changes[i] = MONEY_insert[i];
+                    MONEY_machine[i] -= MONEY_insert[i];
+                } 
+                TOTAL_price = 0;
+                printf("\n");
+                for (int i = 0; i < 5; i++)
+                {
+                    printf("%d " ,MONEY_changes[i]);
+                }
+                goto MENU;
+            }
             goto CHECK_VALID;
         }
 
@@ -352,29 +436,39 @@ CHECK_VALID:
         
     ///////////////////////////////////////////////
     
-    printf("machine money:");
-    for (int i = 0; i < 5; i++)
-    {
-        printf("%d " ,MONEY_machine[i]);
-    } printf("\n");
+    // printf("machine money:");
+    // for (int i = 0; i < 5; i++)
+    // {
+    //     printf("%d " ,MONEY_machine[i]);
+    // } printf("\n");
 
-    printf("money insert :");
-    for (int i = 0; i < 5; i++)
-    {
-        printf("%d " ,MONEY_insert[i]);
-    } printf("\n");
+    // printf("money insert :");
+    // for (int i = 0; i < 5; i++)
+    // {
+    //     printf("%d " ,MONEY_insert[i]);
+    // } printf("\n");
+
     
+    TOTAL_insert = 0;
     for (int i = 0; i < 5; i++)
     {
         TOTAL_insert += (MONEY_insert[i]*MONEY_value[i]);
     }
+
+    // printf("total insert : %d\n" ,TOTAL_insert);
+
+    
+    
+
+
     
 
     /////////////////////////////////////////////////
 
 
-    if (TOTAL_price >= TOTAL_insert)
+    if (TOTAL_price > TOTAL_insert)
     {
+
         printf("insert money is not enough, insert more?(y/n):");
         fgets(input,10,stdin); 
         RE_SCAN:
@@ -383,7 +477,32 @@ CHECK_VALID:
         {
             if (input[0] == 'n') 
             {
-                /* RESET  */ 
+                for (int i = 0; i < TOPPING_amount-1; i++)
+                {
+                    TOPPING_unit[TOPPING_select[i]]++;
+                }
+                for (int i = 0; i < 5; i++)
+                {
+                    MONEY_changes[i] = MONEY_insert[i];
+                    MONEY_machine[i] -= MONEY_insert[i];
+                } 
+                TOTAL_price = 0;
+                printf("\n");
+                for (int i = 0; i < 5; i++)
+                {
+                    printf("%d " ,MONEY_changes[i]);
+                }
+
+                goto MENU;
+
+                /// USE THIS JUST TO CHECK money in machine AFTER RESET ///
+                printf("money machine (after): ");
+                for (int i = 0; i < 5; i++)
+                {
+                    printf("%d ",MONEY_machine[i]);
+                }
+                ///////////////////////////////////////////////////////////
+                
             }
             else if (input[0] != 'y')
             {
@@ -391,7 +510,7 @@ CHECK_VALID:
             }
         }
         RE_SCAN_VALID:
-        while ((input[0]!='n' && input[0]!='y') || input[1]!='\n')
+        while ((input[0]!='n' && input[0]!='y') || input[1]!='\n') 
         {
             printf("sorry, input again");
             fgets(input,10,stdin); 
@@ -407,31 +526,84 @@ CHECK_VALID:
     ////////* CALCULATING FOR CHANGEs *////////
     ///////////////////////////////////////////
 
+    TOTAL_change = TOTAL_insert - TOTAL_price;
+    int TOTAL_change_temp = TOTAL_change;
+
     for (int i = 0; i < 5; i++)
     {
-        //TOTAL_insert += (MONEY_value[i]*MONEY_insert[i]); ใช้ทำบ้าอะไรฟระ 
         TOTAL_machine_money += (MONEY_value[i]*MONEY_machine[i]);
     }
 
-    if (TOTAL_price == TOTAL_machine_money)
+    if (TOTAL_price > TOTAL_machine_money)
     {
-        /* CASE WHERE TOTAL_price equal to TOTAL SUM OF MONEY IN THE MACHINE */
-        printf("Change : 0 (100=0,50=0,20=0,10=0,5=0)") ;
+CHANGE_NOT_ENOUGH:
+        /* code */
+        printf("not enough moneuy, return money:");
         for (int i = 0; i < 5; i++)
         {
-            MONEY_machine[i] = 0;
+            MONEY_changes[i] = MONEY_insert[i];
         }
+        printf("\n");
+        for (int i = 0; i < 5; i++)
+        {
+            printf("%d " ,MONEY_changes[i]);
+        } printf("\n");
         
-    }
-    else if (TOTAL_price > TOTAL_machine_money)
-    {
-        /* CASE WHERE MACHINE DOESN"T HAVE ENOUGH MONEY TO GIVE CHANGEs*/
+    
     }
     else
     {
         /* NORMAL CASE WHERE MACHINE MONEY TO GIVE CHANGEs*/
+        for (int i = 0; i < 5; i++)
+        {
+            while (MONEY_machine[i] > 0)
+            {
+                if ( (TOTAL_change_temp - MONEY_value[i]) >= 0 )
+                {
+                    MONEY_machine[i]--;
+                    MONEY_changes[i]++;
+                    TOTAL_change_temp -= MONEY_value[i];
+                }
+                else { break; }
+            }
+        }
+
+
+        if (TOTAL_change_temp <= 0)
+        {
+            printf("money change: %d" ,TOTAL_change);
+            printf("\n");
+            for (int i = 0; i < 5; i++)
+            {
+                printf("%d " ,MONEY_changes[i]);
+            } printf("\n");
+        }
+        else 
+        {
+             /* machine money is not enough */ 
+            for (int i = 0; i < 5; i++)
+            {
+                MONEY_machine[i] += MONEY_changes[i];
+                MONEY_changes[i] = 0;
+                goto CHANGE_NOT_ENOUGH;
+            }
+            
+        }
+
     }
+
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+    printf("Here your order: %s + %s " ,OUT_tea ,OUT_flavor);
+    for (int i = 0; i < TOPPING_amount; i++)
+    {
+        printf("+ %s " ,OUT_Topping[i]);
+    } printf("\n");
     
+
     
 
     
