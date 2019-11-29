@@ -96,7 +96,7 @@ int main()
     ////////* ASK FOR BASSE TEA *///////
     ////////////////////////////////////
 
-    printf("Please select your base tea (enter 'q' to exit program): ");
+    printf("Please select your base tea (enter 'q' to exit): ");
     //scanf("%s ", input);
     fgets(input,10,stdin);
 
@@ -135,7 +135,7 @@ TEA_SCAN:
     ///////*  SELECT THE SIZE OF CUP;    *///////
     /////////////////////////////////////////////
 
-    printf("Please select the size of your cup (enter 'q' to exit program): ");
+    printf("Please select the size medium (m) or large (l): ");
     fgets(input,10,stdin);
 CUP_SCAN:
     if (input[1] != '\n') { input[0] = '\0'; goto RE_SCAN_CUP; }
@@ -165,7 +165,7 @@ CUP_SCAN:
     ////////* SELECT THE FLAVOuR *////////
     //////////////////////////////////////
 
-    printf("Please select your flavour (enter 'q' to exit program): ");
+    printf("Please select your flavors (enter 'q' to exit): ");
     fgets(input,10,stdin);
 FLAVOUR_SCAN:
     if (input[1] != '\n') { input[0] = '\0'; goto RE_SCAN_FLAVOUR; }
